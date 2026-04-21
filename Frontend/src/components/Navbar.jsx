@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import NotificationDropdown from './NotificationDropdown';
 import notificationService from '../services/notificationService';
+import { resolveMediaUrl } from '../services/urlHelper';
 
 const Navbar = () => {
   const { user, token, logoutContext } = useContext(AuthContext);
@@ -169,7 +170,7 @@ const Navbar = () => {
                   >
                     <div className="w-8 h-8 sm:w-9 sm:h-9 bg-zinc-100 rounded-full flex items-center justify-center overflow-hidden border-2 border-zinc-200 group-hover:border-zinc-900 transition-all">
                       {user?.profilePic ? (
-                        <img src={user.profilePic} alt={user.name} className="w-full h-full object-cover" />
+                        <img src={resolveMediaUrl(user.profilePic)} alt={user.name} className="w-full h-full object-cover" />
                       ) : (
                         <span className="text-xs font-bold text-gray-500 uppercase">{user?.name?.charAt(0) || 'U'}</span>
                       )}
