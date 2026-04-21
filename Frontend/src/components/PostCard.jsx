@@ -51,7 +51,7 @@ const PostCard = ({ post }) => {
         setIsLiked(response.liked);
         setLikesCount(response.likesCount);
       }
-    } catch (err) {
+    } catch {
       // Revert on error
       setIsLiked(!newLikedState);
       setLikesCount(prev => !newLikedState ? prev + 1 : prev - 1);
@@ -67,7 +67,7 @@ const PostCard = ({ post }) => {
       await postService.deletePost(_id);
       toast.success('Story deleted');
       window.location.reload(); // Refresh to update grid
-    } catch (err) {
+    } catch {
       toast.error('Deletion failed');
     }
   };
@@ -98,7 +98,7 @@ const PostCard = ({ post }) => {
     try {
       await userService.savePost(_id);
       toast.success(newSavedState ? 'Saved to your library' : 'Removed from saved');
-    } catch (err) {
+    } catch {
       setIsSaved(!newSavedState);
       toast.error('Failed to update saved status');
     }

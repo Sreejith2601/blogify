@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import userService from '../services/userService';
 import uploadService from '../services/uploadService';
 import { AuthContext } from '../context/AuthContext';
+import { resolveMediaUrl } from '../services/urlHelper';
 import toast from 'react-hot-toast';
 
 const Settings = () => {
@@ -125,7 +126,7 @@ const Settings = () => {
             <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
               <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-gray-200 flex-shrink-0 bg-gray-100 flex items-center justify-center">
                 {formData.profilePic ? (
-                  <img src={formData.profilePic} alt="Preview" className="w-full h-full object-cover" />
+                  <img src={resolveMediaUrl(formData.profilePic)} alt="Preview" className="w-full h-full object-cover" />
                 ) : (
                   <span className="text-2xl font-black text-gray-300 uppercase">{user?.name?.charAt(0) || 'U'}</span>
                 )}
