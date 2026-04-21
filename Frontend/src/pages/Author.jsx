@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import userService from '../services/userService';
 import authService from '../services/authService';
 import PostCard from '../components/PostCard';
+import { resolveMediaUrl } from '../services/urlHelper';
 
 const Author = () => {
   const { id } = useParams();
@@ -92,7 +93,7 @@ const Author = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between -mt-16 mb-6 gap-6">
             <div className="flex items-end gap-6">
               <img 
-                src={author.profilePic || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + author._id} 
+                src={author.profilePic ? resolveMediaUrl(author.profilePic) : 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + author._id} 
                 alt={author.name} 
                 className="w-32 h-32 rounded-full border-4 border-white bg-white shadow-md object-cover"
               />

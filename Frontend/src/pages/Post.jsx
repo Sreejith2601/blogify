@@ -6,6 +6,7 @@ import { AuthContext } from '../context/AuthContext';
 import userService from '../services/userService';
 import toast from 'react-hot-toast';
 import ShareModal from '../components/ShareModal';
+import { resolveMediaUrl, fixLegacyContent } from '../services/urlHelper';
 
 const Post = () => {
   const { id } = useParams();
@@ -272,7 +273,7 @@ const Post = () => {
               <div className="flex items-center gap-5">
                 <div className="w-14 h-14 bg-zinc-900 border border-white/5 rounded-full flex items-center justify-center overflow-hidden">
                   {post.author?.profilePic ? (
-                    <img src={post.author.profilePic} alt={post.author.name} className="w-full h-full object-cover" />
+                    <img src={resolveMediaUrl(post.author.profilePic)} alt={post.author.name} className="w-full h-full object-cover" />
                   ) : (
                     <span className="text-zinc-500 font-bold text-lg">{post.author?.name?.charAt(0) || 'U'}</span>
                   )}
@@ -348,7 +349,7 @@ const Post = () => {
                        prose-h2:text-white prose-h2:tracking-tighter prose-h2:font-black prose-h2:mt-16 prose-h2:mb-8
                        prose-p:mb-10 prose-strong:text-white prose-a:text-brand-accent prose-a:font-black
                        prose-img:rounded-[2.5rem] prose-img:block prose-img:mx-auto prose-img:shadow-2xl prose-img:border prose-img:border-white/5"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: fixLegacyContent(post.content) }}
           />
         </article>
 
@@ -408,11 +409,11 @@ const Post = () => {
                 <div key={comment._id} className="group">
                   {/* Top Level Comment */}
                   <div className="flex gap-4">
-                    <div className="w-10 h-10 bg-gray-100 border border-gray-200 rounded-full flex items-center justify-center overflow-hidden flex-shrink-0">
+                    <div className="w-10 h-10 bg-zinc-900 border border-white/10 rounded-full flex items-center justify-center overflow-hidden flex-shrink-0">
                       {comment.user?.profilePic ? (
-                        <img src={comment.user.profilePic} alt={comment.user.name} className="w-full h-full object-cover" />
+                        <img src={resolveMediaUrl(comment.user.profilePic)} alt={comment.user.name} className="w-full h-full object-cover" />
                       ) : (
-                        <span className="text-gray-400 font-bold text-xs">{comment.user?.name?.charAt(0).toUpperCase() || 'U'}</span>
+                        <span className="text-zinc-600 font-bold text-xs">{comment.user?.name?.charAt(0).toUpperCase() || 'U'}</span>
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -471,11 +472,11 @@ const Post = () => {
                             <div className="mt-4 space-y-6 pl-4 border-l-2 border-gray-50 ml-1">
                               {getReplies(comment._id).map(reply => (
                                 <div key={reply._id} className="group/reply flex gap-3">
-                                  <div className="w-7 h-7 bg-gray-100 border border-gray-200 rounded-full flex items-center justify-center overflow-hidden flex-shrink-0 mt-1">
+                                  <div className="w-7 h-7 bg-zinc-900 border border-white/10 rounded-full flex items-center justify-center overflow-hidden flex-shrink-0 mt-1">
                                     {reply.user?.profilePic ? (
-                                      <img src={reply.user.profilePic} alt={reply.user.name} className="w-full h-full object-cover" />
+                                      <img src={resolveMediaUrl(reply.user.profilePic)} alt={reply.user.name} className="w-full h-full object-cover" />
                                     ) : (
-                                      <span className="text-gray-400 font-bold text-[9px]">{reply.user?.name?.charAt(0).toUpperCase()}</span>
+                                      <span className="text-zinc-600 font-bold text-[9px]">{reply.user?.name?.charAt(0).toUpperCase()}</span>
                                     )}
                                   </div>
                                   <div className="flex-1 min-w-0">

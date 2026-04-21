@@ -5,6 +5,7 @@ import userService from '../services/userService';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../context/AuthContext';
 import ShareModal from './ShareModal';
+import { resolveMediaUrl } from '../services/urlHelper';
 
 const PostCard = ({ post }) => {
   const navigate = useNavigate();
@@ -229,7 +230,7 @@ const PostCard = ({ post }) => {
           <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-white/10 flex-shrink-0 bg-zinc-800 flex items-center justify-center">
             {author?.profilePic ? (
               <img
-                src={author.profilePic}
+                src={resolveMediaUrl(author.profilePic)}
                 alt={author?.name}
                 className="w-full h-full object-cover"
                 onError={(e) => { e.target.style.display = 'none'; }}

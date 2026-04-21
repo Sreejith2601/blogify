@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import userService from '../services/userService';
 import PostCard from '../components/PostCard';
 import { Link } from 'react-router-dom';
+import { resolveMediaUrl } from '../services/urlHelper';
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
@@ -99,7 +100,7 @@ const Profile = () => {
             <div className="relative flex-shrink-0">
               <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl bg-zinc-900 flex items-center justify-center">
                 {profile.profilePic ? (
-                  <img src={profile.profilePic} alt={profile.name} className="w-full h-full object-cover" />
+                  <img src={resolveMediaUrl(profile.profilePic)} alt={profile.name} className="w-full h-full object-cover" />
                 ) : (
                   <span className="text-4xl sm:text-5xl font-black text-zinc-700 uppercase">{profile.name?.charAt(0)}</span>
                 )}
