@@ -100,7 +100,13 @@ const forgotPassword = async (req, res) => {
     await user.save();
 
     // Create reset URL
-    const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+    
+    if (!process.env.FRONTEND_URL) {
+      console.warn("WARNING: FRONTEND_URL is not set. Defaulting to localhost.");
+    }
+
+    const resetUrl = `${frontendUrl}/reset-password/${resetToken}`;
 
     // Email content
     const subject = "Password Reset Request";

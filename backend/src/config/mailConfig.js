@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 const sendMail = async (to, subject, text, html) => {
   try {
     const info = await transporter.sendMail({
-      from: '"BlogApp" <no-reply@blogapp.com>',
+      from: `"Blogify" <${process.env.EMAIL_USER}>`,
       to,
       subject,
       text,
