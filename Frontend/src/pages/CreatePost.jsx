@@ -16,8 +16,8 @@ const CreatePost = () => {
     tags: '',
     isPublished: true
   });
-  
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   // Custom Image Handler for Quill
   const imageHandler = () => {
@@ -58,11 +58,23 @@ const CreatePost = () => {
         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
         [{'list': 'ordered'}, {'list': 'bullet'}],
         ['link', 'image'],
+        ['undo', 'redo'],
         ['clean']
       ],
       handlers: {
-        image: imageHandler
+        image: imageHandler,
+        undo: function() {
+          this.quill.history.undo();
+        },
+        redo: function() {
+          this.quill.history.redo();
+        }
       }
+    },
+    history: {
+      delay: 1000,
+      maxStack: 500,
+      userOnly: true
     }
   }), []);
 
@@ -77,17 +89,37 @@ const CreatePost = () => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.title.trim()) {
+      newErrors.title = 'Title is required';
+    } else if (formData.title.trim().length < 5) {
+      newErrors.title = 'Title must be at least 5 characters long';
+    }
+
+    if (!formData.content.trim() || formData.content === '<p><br></p>') {
+      newErrors.content = 'Content is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleQuillChange = (value) => {
     setFormData(prev => ({ ...prev, content: value }));
+    if (errors.content && value !== '<p><br></p>' && value.trim()) {
+        setErrors(prev => ({ ...prev, content: '' }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.title.trim() || !formData.content.trim() || formData.content === '<p><br></p>') {
-      return toast.error('Title and content are required.');
-    }
+    if (!validate()) return;
 
     setLoading(true);
     try {
@@ -130,17 +162,17 @@ const CreatePost = () => {
               value={formData.title}
               onChange={handleChange}
               autoComplete="off"
-              className="w-full bg-transparent border-b border-white/5 pb-4 text-3xl sm:text-5xl font-black text-white placeholder-zinc-800 focus:border-brand-accent outline-none transition-all"
+              className={`w-full bg-transparent border-b ${errors.title ? 'border-red-500 text-red-100 placeholder-red-300' : 'border-white/5 text-white placeholder-zinc-800 focus:border-brand-accent'} pb-4 text-3xl sm:text-5xl font-black outline-none transition-all`}
               placeholder="Title of your story..."
-              required
             />
+            {errors.title && <p className="text-xs text-red-500 font-medium">{errors.title}</p>}
           </div>
 
           <div className="space-y-6">
-            <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-600">
+              <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-600">
               Content Stream
             </label>
-            <div className="quill-obsidian-wrapper bg-white/2 border border-white/5 rounded-[2rem] overflow-hidden focus-within:border-brand-accent/30 transition-all shadow-2xl">
+            <div className={`quill-obsidian-wrapper bg-white/2 border ${errors.content ? 'border-red-500' : 'border-white/5 focus-within:border-brand-accent/30'} rounded-[2rem] overflow-hidden transition-all shadow-2xl`}>
               <ReactQuill 
                 ref={quillRef}
                 theme="snow"
@@ -151,6 +183,7 @@ const CreatePost = () => {
                 placeholder="Initialize your transmission..."
               />
             </div>
+            {errors.content && <p className="text-xs text-red-500 font-medium">{errors.content}</p>}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">

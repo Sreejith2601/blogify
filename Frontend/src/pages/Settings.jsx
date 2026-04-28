@@ -23,6 +23,7 @@ const Settings = () => {
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (user) {
@@ -41,6 +42,33 @@ const Settings = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) {
+      newErrors.name = 'Full name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+    }
+
+    if (formData.twitter && !/^https?:\/\/(www\.)?(x|twitter)\.com\/[a-zA-Z0-9_]+$/.test(formData.twitter)) {
+        newErrors.twitter = 'Please enter a valid Twitter/X profile URL';
+    }
+    
+    if (formData.linkedin && !/^https?:\/\/(www\.)?linkedin\.com\/.*$/.test(formData.linkedin)) {
+        newErrors.linkedin = 'Please enter a valid LinkedIn profile URL';
+    }
+
+    if (formData.github && !/^https?:\/\/(www\.)?github\.com\/[a-zA-Z0-9_-]+$/.test(formData.github)) {
+        newErrors.github = 'Please enter a valid GitHub profile URL';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleFileChange = async (e) => {
@@ -68,6 +96,8 @@ const Settings = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validate()) return;
+    
     setLoading(true);
     
     try {
@@ -165,8 +195,9 @@ const Settings = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full border border-gray-200 text-gray-900 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-sm"
+                  className={`w-full border ${errors.name ? 'border-red-500' : 'border-gray-200'} text-gray-900 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-sm`}
                 />
+                {errors.name && <p className="text-xs text-red-500 mt-1 font-medium">{errors.name}</p>}
               </div>
               
               <div className="space-y-1.5">
@@ -196,8 +227,9 @@ const Settings = () => {
                   value={formData.twitter}
                   onChange={handleChange}
                   placeholder="https://x.com/username"
-                  className="w-full border border-gray-200 text-gray-900 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-sm"
+                  className={`w-full border ${errors.twitter ? 'border-red-500' : 'border-gray-200'} text-gray-900 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-sm`}
                 />
+                {errors.twitter && <p className="text-xs text-red-500 mt-1 font-medium">{errors.twitter}</p>}
               </div>
               
               <div className="space-y-1.5">
@@ -208,8 +240,9 @@ const Settings = () => {
                   value={formData.linkedin}
                   onChange={handleChange}
                   placeholder="https://linkedin.com/in/username"
-                  className="w-full border border-gray-200 text-gray-900 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-sm"
+                  className={`w-full border ${errors.linkedin ? 'border-red-500' : 'border-gray-200'} text-gray-900 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-sm`}
                 />
+                {errors.linkedin && <p className="text-xs text-red-500 mt-1 font-medium">{errors.linkedin}</p>}
               </div>
 
               <div className="space-y-1.5 sm:col-span-2">
@@ -220,8 +253,9 @@ const Settings = () => {
                   value={formData.github}
                   onChange={handleChange}
                   placeholder="https://github.com/username"
-                  className="w-full border border-gray-200 text-gray-900 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-sm"
+                  className={`w-full border ${errors.github ? 'border-red-500' : 'border-gray-200'} text-gray-900 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-sm`}
                 />
+                {errors.github && <p className="text-xs text-red-500 mt-1 font-medium">{errors.github}</p>}
               </div>
             </div>
           </section>

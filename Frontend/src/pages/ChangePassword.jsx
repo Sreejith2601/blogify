@@ -7,12 +7,39 @@ const ChangePassword = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ oldPassword: '', newPassword: '', confirmPassword: '' });
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.oldPassword) {
+      newErrors.oldPassword = 'Current password is required';
+    }
+
+    if (!formData.newPassword) {
+      newErrors.newPassword = 'New password is required';
+    } else if (formData.newPassword.length < 6) {
+      newErrors.newPassword = 'Password must be at least 6 characters';
+    }
+
+    if (formData.newPassword !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.newPassword !== formData.confirmPassword) {
-      return toast.error('New passwords do not match');
-    }
+    if (!validate()) return;
 
     setLoading(true);
     try {
@@ -51,10 +78,11 @@ const ChangePassword = () => {
                 type="password"
                 required
                 value={formData.oldPassword}
-                onChange={(e) => setFormData(prev => ({ ...prev, oldPassword: e.target.value }))}
-                className="block w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 text-white placeholder-zinc-800 focus:ring-1 focus:ring-zinc-700 outline-none transition-luxury sm:text-sm"
+                onChange={handleChange}
+                className={`block w-full bg-zinc-950 border ${errors.oldPassword ? 'border-red-500' : 'border-zinc-800'} rounded-2xl px-5 py-4 text-white placeholder-zinc-800 focus:ring-1 focus:ring-zinc-700 outline-none transition-luxury sm:text-sm`}
                 placeholder="••••••••"
               />
+              {errors.oldPassword && <p className="mt-1 text-xs text-red-500 font-medium">{errors.oldPassword}</p>}
             </div>
 
             <div className="pt-4 border-t border-zinc-900">
@@ -67,10 +95,11 @@ const ChangePassword = () => {
                 type="password"
                 required
                 value={formData.newPassword}
-                onChange={(e) => setFormData(prev => ({ ...prev, newPassword: e.target.value }))}
-                className="block w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 text-white placeholder-zinc-800 focus:ring-1 focus:ring-zinc-700 outline-none transition-luxury sm:text-sm"
+                onChange={handleChange}
+                className={`block w-full bg-zinc-950 border ${errors.newPassword ? 'border-red-500' : 'border-zinc-800'} rounded-2xl px-5 py-4 text-white placeholder-zinc-800 focus:ring-1 focus:ring-zinc-700 outline-none transition-luxury sm:text-sm`}
                 placeholder="••••••••"
               />
+              {errors.newPassword && <p className="mt-1 text-xs text-red-500 font-medium">{errors.newPassword}</p>}
             </div>
 
             <div>
@@ -83,10 +112,11 @@ const ChangePassword = () => {
                 type="password"
                 required
                 value={formData.confirmPassword}
-                onChange={(e) => setFormData(prev => ({ ...prev, confirmPassword: e.target.value }))}
-                className="block w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 text-white placeholder-zinc-800 focus:ring-1 focus:ring-zinc-700 outline-none transition-luxury sm:text-sm"
+                onChange={handleChange}
+                className={`block w-full bg-zinc-950 border ${errors.confirmPassword ? 'border-red-500' : 'border-zinc-800'} rounded-2xl px-5 py-4 text-white placeholder-zinc-800 focus:ring-1 focus:ring-zinc-700 outline-none transition-luxury sm:text-sm`}
                 placeholder="••••••••"
               />
+              {errors.confirmPassword && <p className="mt-1 text-xs text-red-500 font-medium">{errors.confirmPassword}</p>}
             </div>
 
             <div className="pt-4">

@@ -51,6 +51,11 @@ const userSchema = new mongoose.Schema(
         ref: "Post",
       },
     ],
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
   },
@@ -59,4 +64,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.models.User || mongoose.model("User", userSchema);

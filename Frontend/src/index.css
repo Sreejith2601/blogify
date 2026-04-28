@@ -212,3 +212,22 @@ a {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
   border-radius: 8px !important;
 }
+/* Undo/Redo Icons */
+.ql-undo::after {
+  content: "↶";
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.ql-redo::after {
+  content: "↷";
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.quill-obsidian-wrapper .ql-undo::after,
+.quill-obsidian-wrapper .ql-redo::after {
+  color: #64748b;
+}
+.quill-obsidian-wrapper .ql-undo:hover::after,
+.quill-obsidian-wrapper .ql-redo:hover::after {
+  color: #f59e0b;
+}

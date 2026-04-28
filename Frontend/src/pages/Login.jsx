@@ -6,16 +6,42 @@ import toast from 'react-hot-toast';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const { loginContext } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    // Clear error when user starts typing
+    if (errors[e.target.name]) {
+      setErrors(prev => ({ ...prev, [e.target.name]: '' }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!validate()) return;
+    
     setLoading(true);
 
     try {
@@ -60,8 +86,9 @@ const Login = () => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="block w-full bg-white border border-zinc-200 rounded-2xl px-5 py-4 text-zinc-900 placeholder-zinc-200 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition-luxury sm:text-sm"
+                className={`block w-full bg-white border ${errors.email ? 'border-red-500' : 'border-zinc-200'} rounded-2xl px-5 py-4 text-zinc-900 placeholder-zinc-200 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition-luxury sm:text-sm`}
               />
+              {errors.email && <p className="mt-1 text-xs text-red-500 font-medium">{errors.email}</p>}
             </div>
 
             <div>
@@ -83,8 +110,9 @@ const Login = () => {
                 required
                 value={formData.password}
                 onChange={handleChange}
-                className="block w-full bg-white border border-zinc-200 rounded-2xl px-5 py-4 text-zinc-900 placeholder-zinc-200 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition-luxury sm:text-sm"
+                className={`block w-full bg-white border ${errors.password ? 'border-red-500' : 'border-zinc-200'} rounded-2xl px-5 py-4 text-zinc-900 placeholder-zinc-200 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition-luxury sm:text-sm`}
               />
+              {errors.password && <p className="mt-1 text-xs text-red-500 font-medium">{errors.password}</p>}
             </div>
 
             <div className="pt-4">
