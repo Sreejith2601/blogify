@@ -9,14 +9,13 @@ const Home = () => {
   const [error, setError] = useState(null);
   const { token } = useContext(AuthContext);
   
-  const [activeTab, setActiveTab] = useState('global');
+  const [activeTab] = useState('global');
   const [category, setCategory] = useState('');
   const [tag, setTag] = useState('');
   const [tagInput, setTagInput] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchInput, setSearchInput] = useState('');
 
-  const categories = ['Technology', 'Lifestyle', 'Travel', 'Food', 'Health', 'Education'];
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -53,13 +52,6 @@ const Home = () => {
     fetchPosts();
   }, [category, tag, searchQuery, activeTab, token]);
 
-  const clearFilters = () => {
-    setCategory('');
-    setTag('');
-    setTagInput('');
-    setSearchQuery('');
-    setSearchInput('');
-  };
 
   return (
     <div className="bg-brand-bg min-h-screen">

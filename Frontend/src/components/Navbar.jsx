@@ -19,11 +19,11 @@ const Navbar = () => {
   const notifRef = useRef(null);
 
   useEffect(() => {
-    // Close mobile menu on route change
-    setShowMobileMenu(false);
-    setShowProfileMenu(false);
-    setShowNotifications(false);
-  }, [location.pathname]);
+    // Close mobile menu on route change if they are open
+    if (showMobileMenu) setShowMobileMenu(false);
+    if (showProfileMenu) setShowProfileMenu(false);
+    if (showNotifications) setShowNotifications(false);
+  }, [location.pathname, showMobileMenu, showProfileMenu, showNotifications]);
 
   useEffect(() => {
     if (token) {
@@ -31,7 +31,9 @@ const Navbar = () => {
         try {
           const data = await notificationService.getNotifications();
           setUnreadCount(data.unreadCount || 0);
-        } catch {}
+        } catch (error) {
+          console.error('Failed to fetch notifications:', error);
+        }
       };
       fetchCount();
       const interval = setInterval(fetchCount, 30000);
