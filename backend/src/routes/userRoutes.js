@@ -12,6 +12,7 @@ const {
 } = require("../controllers/userController");
 const { getPostsByUser } = require("../controllers/postController");
 const authMiddleware = require("../middleware/authMiddleware");
+const optionalAuth = require("../middleware/optionalAuth");
 
 const router = express.Router();
 
@@ -36,8 +37,8 @@ router.post("/subscribe-category", authMiddleware, toggleCategorySubscription);
 // Get specific user by id
 router.get("/:id", getUserById);
 
-// Get all posts by a specific user - public route
-router.get("/:id/posts", getPostsByUser);
+// Get all posts by a specific user - public route (optional auth to show drafts to owner)
+router.get("/:id/posts", optionalAuth, getPostsByUser);
 
 // Save/Unsave post - protected route
 router.post("/save/:id", authMiddleware, toggleSavePost);
