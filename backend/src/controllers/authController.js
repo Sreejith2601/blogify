@@ -14,6 +14,10 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ message: "Missing required fields: name, email, password" });
     }
 
+    if (password.length < 8) {
+      return res.status(400).json({ message: "Password must be at least 8 characters long" });
+    }
+
     // check user exists
     const userExists = await User.findOne({ email });
 
@@ -144,6 +148,10 @@ const resetPassword = async (req, res) => {
       return res.status(400).json({ message: "Password reset token is invalid or has expired" });
     }
 
+    if (password.length < 8) {
+      return res.status(400).json({ message: "Password must be at least 8 characters long" });
+    }
+
     // Hash new password
     const hashedPassword = await bcrypt.hash(password, 10);
     user.password = hashedPassword;
@@ -172,6 +180,10 @@ const changePassword = async (req, res) => {
     const isMatch = await bcrypt.compare(oldPassword, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Incorrect current password" });
+    }
+
+    if (newPassword.length < 8) {
+      return res.status(400).json({ message: "New password must be at least 8 characters long" });
     }
 
     // Hash and save new password
