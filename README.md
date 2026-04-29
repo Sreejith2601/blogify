@@ -25,14 +25,10 @@ A modern, full-stack blogging platform where users can read, write, and manage s
 
 ## Admin Credentials for Testing
 
-To review the application as an Admin, we have provided a seed script. Run the following command in the `backend` directory:
+The application automatically seeds an admin account into the database on the first run. You do not need to run any manual scripts.
 
-```bash
-npm run seed:admin
-```
-
-This will create an admin user in the database with the following credentials:
+Use the following credentials to log in and test administrative features:
 - **Email**: admin@blogify.com
 - **Password**: admin123
 
-You can use these credentials to log in and test administrative features.
+Simply start the backend server, and the account will be ready for use.
