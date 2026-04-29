@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import userService from '../services/userService';
 import PostCard from '../components/PostCard';
 import { Link } from 'react-router-dom';
@@ -44,7 +44,7 @@ const Profile = () => {
     fetchData();
   }, []);
 
-  const fetchSavedPosts = async () => {
+  const fetchSavedPosts = useCallback(async () => {
     if (savedPosts.length > 0) return;
     setSavedLoading(true);
     try {
@@ -55,13 +55,13 @@ const Profile = () => {
     } finally {
       setSavedLoading(false);
     }
-  };
+  }, [savedPosts.length]);
 
   useEffect(() => {
     if (activeTab === 'saved') {
       fetchSavedPosts();
     }
-  }, [activeTab]);
+  }, [activeTab, fetchSavedPosts]);
 
   if (loading) {
     return (

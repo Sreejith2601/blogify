@@ -15,7 +15,7 @@ const ManageMetadata = () => {
     try {
       const data = await postService.getUserMetadata();
       setMetadata(data);
-    } catch (err) {
+    } catch {
       toast.error('Failed to load your tags and categories.');
     } finally {
       setLoading(false);
