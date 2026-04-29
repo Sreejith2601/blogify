@@ -19,11 +19,14 @@ const Navbar = () => {
   const notifRef = useRef(null);
 
   useEffect(() => {
-    // Close mobile menu on route change if they are open
-    if (showMobileMenu) setShowMobileMenu(false);
-    if (showProfileMenu) setShowProfileMenu(false);
-    if (showNotifications) setShowNotifications(false);
-  }, [location.pathname, showMobileMenu, showProfileMenu, showNotifications]);
+    // Close menus on route change using a timeout to avoid cascading renders warning
+    const timeoutId = setTimeout(() => {
+      setShowMobileMenu(false);
+      setShowProfileMenu(false);
+      setShowNotifications(false);
+    }, 0);
+    return () => clearTimeout(timeoutId);
+  }, [location.pathname]);
 
   useEffect(() => {
     if (token) {

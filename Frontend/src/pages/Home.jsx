@@ -10,11 +10,11 @@ const Home = () => {
   const { token } = useContext(AuthContext);
   
   const [activeTab] = useState('global');
-  const [category, setCategory] = useState('');
+  const [category] = useState('');
   const [tag, setTag] = useState('');
-  const [tagInput, setTagInput] = useState('');
+  const [tagInput] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput] = useState('');
 
 
   useEffect(() => {
