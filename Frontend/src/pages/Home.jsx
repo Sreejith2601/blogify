@@ -67,10 +67,10 @@ const Home = () => {
         {/* Header */}
         <header className="mb-14 md:mb-20">
           <div>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter mb-4 leading-[0.9]">
-              Latest <span className="text-zinc-800">Signals</span>.
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-brand-primary tracking-tighter mb-4 leading-[0.9]">
+              Latest <span className="opacity-20">Signals</span>.
             </h1>
-            <p className="text-base sm:text-lg text-zinc-500 max-w-xl font-medium leading-relaxed uppercase tracking-widest text-[10px] sm:text-[11px]">
+            <p className="text-base sm:text-lg text-brand-muted max-w-xl font-medium leading-relaxed uppercase tracking-widest text-[10px] sm:text-[11px]">
               A curated flow of perspectives and insights from the edge of the network.
             </p>
           </div>
@@ -81,8 +81,8 @@ const Home = () => {
         <main>
           {loading ? (
             <div className="py-24 flex flex-col items-center gap-4">
-               <div className="w-8 h-8 border-2 border-zinc-900 border-t-brand-accent rounded-full animate-spin"></div>
-               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-700">Connecting to Stream...</span>
+               <div className="w-8 h-8 border-2 border-brand-border border-t-brand-accent rounded-full animate-spin"></div>
+               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted">Connecting to Stream...</span>
             </div>
           ) : error ? (
             <div className="p-8 sm:p-12 bg-white border border-gray-100 rounded-2xl text-center max-w-2xl mx-auto shadow-sm">

@@ -74,25 +74,25 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center py-12 px-6 lg:px-8 bg-zinc-50">
+    <div className="min-h-screen flex flex-col justify-center py-12 px-6 lg:px-8 bg-brand-bg">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="text-center text-4xl font-black tracking-tighter text-zinc-900 mb-2">
+        <h2 className="text-center text-4xl font-black tracking-tighter text-brand-primary mb-2">
           Join the circle.
         </h2>
         <p className="text-center text-sm text-zinc-500 font-medium">
           Already a member?{' '}
-          <Link to="/login" className="font-bold text-blue-600 hover:text-blue-500 transition-colors underline underline-offset-4">
+          <Link to="/login" className="font-bold text-brand-accent hover:opacity-80 transition-colors underline underline-offset-4">
             Sign in
           </Link>
         </p>
       </div>
 
       <div className="mt-12 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-10 px-8 border border-zinc-200 rounded-3xl shadow-xl shadow-zinc-900/5">
+        <div className="bg-brand-surface py-10 px-8 border border-brand-border rounded-3xl shadow-xl shadow-brand-primary/5">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="name" className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 mb-2">
+                <label htmlFor="name" className="block text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted mb-2">
                   Full Name
                 </label>
                 <input
@@ -102,13 +102,13 @@ const Register = () => {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className={`block w-full bg-white border ${errors.name ? 'border-red-500' : 'border-zinc-200'} rounded-2xl px-5 py-4 text-zinc-900 placeholder-zinc-200 focus:ring-1 focus:ring-blue-500 outline-none transition-luxury sm:text-sm`}
+                  className={`block w-full bg-brand-bg border ${errors.name ? 'border-red-500' : 'border-brand-border'} rounded-2xl px-5 py-4 text-brand-primary placeholder-zinc-300 focus:ring-1 focus:ring-brand-accent outline-none transition-luxury sm:text-sm`}
                   placeholder="John"
                 />
                 {errors.name && <p className="mt-1 text-xs text-red-500 font-medium">{errors.name}</p>}
               </div>
               <div>
-                <label htmlFor="username" className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 mb-2">
+                <label htmlFor="username" className="block text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted mb-2">
                   Username
                 </label>
                 <input
@@ -118,7 +118,7 @@ const Register = () => {
                   required
                   value={formData.username}
                   onChange={handleChange}
-                  className={`block w-full bg-white border ${errors.username ? 'border-red-500' : 'border-zinc-200'} rounded-2xl px-5 py-4 text-zinc-900 placeholder-zinc-200 focus:ring-1 focus:ring-blue-500 outline-none transition-luxury sm:text-sm`}
+                  className={`block w-full bg-brand-bg border ${errors.username ? 'border-red-500' : 'border-brand-border'} rounded-2xl px-5 py-4 text-brand-primary placeholder-zinc-300 focus:ring-1 focus:ring-brand-accent outline-none transition-luxury sm:text-sm`}
                   placeholder="jdoe"
                 />
                 {errors.username && <p className="mt-1 text-xs text-red-500 font-medium">{errors.username}</p>}
@@ -126,7 +126,7 @@ const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 mb-2">
+              <label htmlFor="email" className="block text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted mb-2">
                 Email Address
               </label>
               <input
@@ -137,14 +137,14 @@ const Register = () => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className={`block w-full bg-white border ${errors.email ? 'border-red-500' : 'border-zinc-200'} rounded-2xl px-5 py-4 text-zinc-900 placeholder-zinc-200 focus:ring-1 focus:ring-blue-500 outline-none transition-luxury sm:text-sm`}
+                className={`block w-full bg-brand-bg border ${errors.email ? 'border-red-500' : 'border-brand-border'} rounded-2xl px-5 py-4 text-brand-primary placeholder-zinc-300 focus:ring-1 focus:ring-brand-accent outline-none transition-luxury sm:text-sm`}
                 placeholder="you@email.com"
               />
               {errors.email && <p className="mt-1 text-xs text-red-500 font-medium">{errors.email}</p>}
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 mb-2">
+              <label htmlFor="password" className="block text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted mb-2">
                 Password
               </label>
               <input
@@ -154,7 +154,7 @@ const Register = () => {
                 required
                 value={formData.password}
                 onChange={handleChange}
-                className={`block w-full bg-white border ${errors.password ? 'border-red-500' : 'border-zinc-200'} rounded-2xl px-5 py-4 text-zinc-900 placeholder-zinc-200 focus:ring-1 focus:ring-blue-500 outline-none transition-luxury sm:text-sm`}
+                className={`block w-full bg-brand-bg border ${errors.password ? 'border-red-500' : 'border-brand-border'} rounded-2xl px-5 py-4 text-brand-primary placeholder-zinc-300 focus:ring-1 focus:ring-brand-accent outline-none transition-luxury sm:text-sm`}
                 placeholder="••••••••"
               />
               {errors.password && <p className="mt-1 text-xs text-red-500 font-medium">{errors.password}</p>}
@@ -164,7 +164,7 @@ const Register = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex w-full justify-center items-center gap-2 rounded-full bg-zinc-900 px-5 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-white shadow-xl shadow-zinc-900/10 hover:bg-black focus:outline-none transition-luxury disabled:opacity-50"
+                className="flex w-full justify-center items-center gap-2 rounded-full bg-brand-primary px-5 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-brand-bg shadow-xl shadow-brand-primary/10 hover:opacity-90 focus:outline-none transition-luxury disabled:opacity-50"
               >
                 {loading ? 'Processing...' : 'Create Account'}
               </button>

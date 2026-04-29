@@ -1,29 +1,29 @@
 @import "tailwindcss";
 @theme {
-  --color-brand-primary: #f8fafc; /* Primary Text */
-  --color-brand-accent: #f59e0b;
-  --color-brand-accent-hover: #fbbf24;
-  --color-brand-bg: #020617;      /* Deep Midnight */
-  --color-brand-surface: #0f172a; /* Card Dark Blue */
-  --color-brand-nav: #ffffff;     /* Polar White */
-  --color-brand-border: #1e293b;
-  --color-brand-muted: #64748b;
-  --color-brand-accent-glow: rgba(245, 158, 11, 0.2);
+  --color-brand-primary: #1a1a1a; /* Off-black for text */
+  --color-brand-accent: #8ca67a;  /* Sage Green */
+  --color-brand-accent-hover: #7a946a;
+  --color-brand-bg: #fdfcf0;      /* Warm Beige/Cream */
+  --color-brand-surface: #f7f5e6; /* Slightly darker cream for cards */
+  --color-brand-nav: #ffffff;
+  --color-brand-border: #e8e4d0;
+  --color-brand-muted: #5c5c5c;
+  --color-brand-accent-glow: rgba(140, 166, 122, 0.2);
   
   --shadow-luxury: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
 }
 
 :root {
-  --text: #94a3b8;
-  --text-h: #f8fafc;
-  --bg: #020617;
-  --border: #1e293b;
+  --text: #5c5c5c;
+  --text-h: #1a1a1a;
+  --bg: #fdfcf0;
+  --border: #e8e4d0;
   
   --sans: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
   --mono: 'JetBrains Mono', monospace;
 
   font: 16px/1.6 var(--sans);
-  color-scheme: dark;
+  color-scheme: light;
   color: var(--text);
   background: var(--bg);
   
@@ -60,10 +60,10 @@ a {
 }
 
 .glass {
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 /* Custom transitions for a premium feel */
@@ -77,10 +77,10 @@ a {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #020617;
+  background: #fdfcf0;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #e8e4d0;
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -90,8 +90,8 @@ a {
 /* Quill Obsidian Editor Overrides */
 .quill-obsidian-wrapper .ql-toolbar.ql-snow {
   border: none !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-  background: rgba(255, 255, 255, 0.02) !important;
+  border-bottom: 1px solid var(--color-brand-border) !important;
+  background: rgba(0, 0, 0, 0.02) !important;
   padding: 1.5rem !important;
 }
 
@@ -99,7 +99,7 @@ a {
   border: none !important;
   font-family: 'Outfit', sans-serif !important;
   font-size: 1.1rem !important;
-  color: #d1d5db !important;
+  color: var(--color-brand-primary) !important;
   min-height: 400px;
 }
 
@@ -109,31 +109,31 @@ a {
 }
 
 .quill-obsidian-wrapper .ql-editor.ql-blank::before {
-  color: #334155 !important;
+  color: var(--color-brand-muted) !important;
   font-style: normal !important;
   left: 2rem !important;
 }
 
 .quill-obsidian-wrapper .ql-snow .ql-stroke {
-  stroke: #64748b !important;
+  stroke: var(--color-brand-muted) !important;
 }
 
 .quill-obsidian-wrapper .ql-snow .ql-fill {
-  fill: #64748b !important;
+  fill: var(--color-brand-muted) !important;
 }
 
 .quill-obsidian-wrapper .ql-snow .ql-picker {
-  color: #64748b !important;
+  color: var(--color-brand-muted) !important;
 }
 
 .quill-obsidian-wrapper .ql-snow.ql-toolbar button:hover .ql-stroke,
 .quill-obsidian-wrapper .ql-snow.ql-toolbar button.ql-active .ql-stroke {
-  stroke: #f59e0b !important;
+  stroke: var(--color-brand-accent) !important;
 }
 
 .quill-obsidian-wrapper .ql-snow.ql-toolbar button:hover .ql-fill,
 .quill-obsidian-wrapper .ql-snow.ql-toolbar button.ql-active .ql-fill {
-  fill: #f59e0b !important;
+  fill: var(--color-brand-accent) !important;
 }
 
 /* Responsive Prose Images */
@@ -143,7 +143,7 @@ a {
   margin-left: auto !important;
   margin-right: auto !important;
   display: block !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1) !important;
 }
 
 @media (max-width: 640px) {

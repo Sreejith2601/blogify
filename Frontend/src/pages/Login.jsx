@@ -58,24 +58,24 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center py-12 px-6 lg:px-8 bg-zinc-50">
+    <div className="min-h-screen flex flex-col justify-center py-12 px-6 lg:px-8 bg-brand-bg">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="text-center text-4xl font-black tracking-tighter text-zinc-900 mb-2">
+        <h2 className="text-center text-4xl font-black tracking-tighter text-brand-primary mb-2">
           Welcome back.
         </h2>
         <p className="text-center text-sm text-zinc-500 font-medium">
           New here?{' '}
-          <Link to="/register" className="font-bold text-blue-600 hover:text-blue-500 transition-colors underline underline-offset-4">
+          <Link to="/register" className="font-bold text-brand-accent hover:opacity-80 transition-colors underline underline-offset-4">
             Create an account
           </Link>
         </p>
       </div>
 
       <div className="mt-12 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-10 px-8 border border-zinc-200 rounded-3xl shadow-xl shadow-zinc-900/5">
+        <div className="bg-brand-surface py-10 px-8 border border-brand-border rounded-3xl shadow-xl shadow-brand-primary/5">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="email" className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 mb-2">
+              <label htmlFor="email" className="block text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted mb-2">
                 Email Address
               </label>
               <input
@@ -86,7 +86,7 @@ const Login = () => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className={`block w-full bg-white border ${errors.email ? 'border-red-500' : 'border-zinc-200'} rounded-2xl px-5 py-4 text-zinc-900 placeholder-zinc-200 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition-luxury sm:text-sm`}
+                className={`block w-full bg-brand-bg border ${errors.email ? 'border-red-500' : 'border-brand-border'} rounded-2xl px-5 py-4 text-brand-primary placeholder-zinc-300 focus:ring-1 focus:ring-brand-accent focus:border-brand-accent outline-none transition-luxury sm:text-sm`}
               />
               {errors.email && <p className="mt-1 text-xs text-red-500 font-medium">{errors.email}</p>}
             </div>
@@ -97,7 +97,7 @@ const Login = () => {
                   Password
                 </label>
                 <div className="text-[10px] font-black uppercase tracking-widest">
-                  <Link to="/forgot-password" title="Recover Password" id="forgotPasswordLink" className="text-zinc-300 hover:text-zinc-900 transition-colors">
+                  <Link to="/forgot-password" title="Recover Password" id="forgotPasswordLink" className="text-brand-muted/40 hover:text-brand-primary transition-colors">
                     Forgot?
                   </Link>
                 </div>
@@ -110,7 +110,7 @@ const Login = () => {
                 required
                 value={formData.password}
                 onChange={handleChange}
-                className={`block w-full bg-white border ${errors.password ? 'border-red-500' : 'border-zinc-200'} rounded-2xl px-5 py-4 text-zinc-900 placeholder-zinc-200 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition-luxury sm:text-sm`}
+                className={`block w-full bg-brand-bg border ${errors.password ? 'border-red-500' : 'border-brand-border'} rounded-2xl px-5 py-4 text-brand-primary placeholder-zinc-300 focus:ring-1 focus:ring-brand-accent focus:border-brand-accent outline-none transition-luxury sm:text-sm`}
               />
               {errors.password && <p className="mt-1 text-xs text-red-500 font-medium">{errors.password}</p>}
             </div>
@@ -119,7 +119,7 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex w-full justify-center items-center gap-2 rounded-full bg-zinc-900 px-5 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-white shadow-xl shadow-zinc-900/10 hover:bg-black focus:outline-none transition-luxury disabled:opacity-50"
+                className="flex w-full justify-center items-center gap-2 rounded-full bg-brand-primary px-5 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-brand-bg shadow-xl shadow-brand-primary/10 hover:opacity-90 focus:outline-none transition-luxury disabled:opacity-50"
               >
                 {loading ? 'Authenticating...' : 'Sign In'}
               </button>

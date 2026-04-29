@@ -2,12 +2,12 @@ import Navbar from '../components/Navbar';
 
 const MainLayout = ({ children }) => {
   return (
-    <div className="min-h-screen bg-[#fafafa] flex flex-col text-gray-600">
+    <div className="min-h-screen bg-brand-bg flex flex-col text-brand-muted">
       <Navbar />
       <main className="flex-grow">
         {children}
       </main>
-      <footer className="py-8 text-center text-gray-400 text-sm border-t border-gray-100 bg-white">
+      <footer className="py-8 text-center text-brand-muted/60 text-[10px] font-black uppercase tracking-widest border-t border-brand-border bg-brand-nav">
         © 2026 Blogify. All rights reserved.
       </footer>
     </div>

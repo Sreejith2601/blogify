@@ -63,19 +63,19 @@ const Navbar = () => {
   const navLinkClass = (path) =>
     `text-[11px] font-black uppercase tracking-[0.15em] transition-all duration-200 pb-0.5 ${
       isActive(path)
-        ? 'text-zinc-900 border-b-2 border-brand-accent'
-        : 'text-zinc-500 hover:text-zinc-900 border-b-2 border-transparent'
+        ? 'text-brand-primary border-b-2 border-brand-accent'
+        : 'text-brand-muted hover:text-brand-primary border-b-2 border-transparent'
     }`;
 
   const mobileLinkClass = (path) =>
     `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-150 ${
       isActive(path)
-        ? 'bg-zinc-50 text-zinc-900'
-        : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900'
+        ? 'bg-brand-surface text-brand-primary'
+        : 'text-brand-muted hover:bg-brand-surface hover:text-brand-primary'
     }`;
 
   return (
-    <nav className="bg-white sticky top-0 z-50 border-b border-zinc-100 shadow-sm">
+    <nav className="bg-brand-nav sticky top-0 z-50 border-b border-brand-border shadow-sm">
       <div className="px-4 sm:px-6 md:px-10 lg:px-20 py-3 sm:py-4">
         <div className="flex items-center justify-between">
 
@@ -117,7 +117,7 @@ const Navbar = () => {
 
           {/* Center — Logo */}
           <div className="absolute left-1/2 -translate-x-1/2">
-            <Link to="/" className="text-xl sm:text-2xl font-black tracking-tighter text-zinc-900 hover:text-zinc-900 transition-all uppercase">
+            <Link to="/" className="text-xl sm:text-2xl font-black tracking-tighter text-brand-primary hover:text-brand-accent transition-all uppercase">
               Blogify
             </Link>
           </div>
@@ -129,7 +129,7 @@ const Navbar = () => {
                 {/* Write button — hidden on small screens */}
                 <Link
                   to="/create"
-                  className="hidden sm:flex items-center gap-2 px-4 py-2 bg-zinc-900 text-white text-[11px] font-black uppercase tracking-wide rounded-lg hover:bg-zinc-800 transition-all duration-200 shadow-sm"
+                  className="hidden sm:flex items-center gap-2 px-4 py-2 bg-brand-primary text-brand-bg text-[11px] font-black uppercase tracking-wide rounded-lg hover:opacity-90 transition-all duration-200 shadow-sm"
                 >
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
@@ -141,13 +141,13 @@ const Navbar = () => {
                 <div className="relative" ref={notifRef}>
                   <button
                     onClick={() => { setShowNotifications(!showNotifications); setShowProfileMenu(false); }}
-                    className="w-9 h-9 flex items-center justify-center text-zinc-400 hover:text-zinc-900 transition-all relative focus:outline-none rounded-full hover:bg-zinc-50"
+                    className="w-9 h-9 flex items-center justify-center text-brand-muted hover:text-brand-primary transition-all relative focus:outline-none rounded-full hover:bg-brand-bg"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                     </svg>
                     {unreadCount > 0 && (
-                      <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-brand-accent rounded-full border-2 border-white shadow-sm"></span>
+                      <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-brand-accent rounded-full border-2 border-brand-nav shadow-sm"></span>
                     )}
                   </button>
                   {showNotifications && (
@@ -168,24 +168,24 @@ const Navbar = () => {
                     onClick={() => { setShowProfileMenu(!showProfileMenu); setShowNotifications(false); }}
                     className="flex items-center gap-1.5 focus:outline-none group"
                   >
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 bg-zinc-100 rounded-full flex items-center justify-center overflow-hidden border-2 border-zinc-200 group-hover:border-zinc-900 transition-all">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 bg-brand-surface rounded-full flex items-center justify-center overflow-hidden border-2 border-brand-border group-hover:border-brand-accent transition-all">
                       {user?.profilePic ? (
                         <img src={resolveMediaUrl(user.profilePic)} alt={user.name} className="w-full h-full object-cover" />
                       ) : (
                         <span className="text-xs font-bold text-gray-500 uppercase">{user?.name?.charAt(0) || 'U'}</span>
                       )}
                     </div>
-                    <svg className={`hidden sm:block w-3.5 h-3.5 text-gray-400 transition-transform duration-200 ${showProfileMenu ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className={`hidden sm:block w-3.5 h-3.5 text-brand-muted transition-transform duration-200 ${showProfileMenu ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
 
                   {showProfileMenu && (
-                    <div className="absolute right-0 mt-3 w-64 bg-white border border-zinc-100 rounded-3xl shadow-2xl flex flex-col z-50 overflow-hidden ring-1 ring-zinc-900/5">
-                      <div className="px-6 py-5 border-b border-zinc-100 bg-zinc-50/50">
-                        <p className="text-[11px] font-black uppercase tracking-widest text-zinc-400 mb-1">Authenticated Explorer</p>
-                        <p className="text-sm font-black text-zinc-900 truncate">{user?.name}</p>
-                        <p className="text-[10px] text-zinc-500 truncate font-medium">{user?.email}</p>
+                    <div className="absolute right-0 mt-3 w-64 bg-brand-nav border border-brand-border rounded-3xl shadow-2xl flex flex-col z-50 overflow-hidden ring-1 ring-brand-primary/5">
+                      <div className="px-6 py-5 border-b border-brand-border bg-brand-surface">
+                        <p className="text-[11px] font-black uppercase tracking-widest text-brand-muted mb-1 opacity-60">Authenticated Explorer</p>
+                        <p className="text-sm font-black text-brand-primary truncate">{user?.name}</p>
+                        <p className="text-[10px] text-brand-muted truncate font-medium">{user?.email}</p>
                       </div>
                       <div className="py-2">
                         <DropdownLink to="/profile" icon="👤" label="My Profile" onClick={() => setShowProfileMenu(false)} />
@@ -194,11 +194,11 @@ const Navbar = () => {
                         <DropdownLink to="/analytics" icon="📊" label="Analytics" onClick={() => setShowProfileMenu(false)} />
                         <DropdownLink to="/metadata" icon="🏷️" label="Manage Tags" onClick={() => setShowProfileMenu(false)} />
                       </div>
-                      <div className="border-t border-zinc-100 py-2">
+                      <div className="border-t border-brand-border py-2">
                         <DropdownLink to="/settings" icon="⚙️" label="Edit Profile" onClick={() => setShowProfileMenu(false)} />
                         <DropdownLink to="/change-password" icon="🔒" label="Change Password" onClick={() => setShowProfileMenu(false)} />
                       </div>
-                      <div className="border-t border-zinc-100 py-2">
+                      <div className="border-t border-brand-border py-2">
                         <button onClick={handleLogout} className="w-full flex items-center gap-3 px-6 py-3 text-xs font-black uppercase tracking-widest text-red-500 hover:bg-red-50 transition-all duration-200">
                           <span className="text-base">🚪</span>
                           <span>Logout Archive</span>
@@ -210,10 +210,10 @@ const Navbar = () => {
               </>
             ) : (
               <div className="flex items-center gap-2">
-                <Link to="/login" className="hidden sm:block px-4 py-2 text-sm font-semibold text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                <Link to="/login" className="hidden sm:block px-4 py-2 text-sm font-semibold text-brand-muted hover:text-brand-primary transition-colors duration-200">
                   Sign In
                 </Link>
-                <Link to="/register" className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200 text-xs sm:text-sm font-semibold shadow-sm">
+                <Link to="/register" className="px-4 py-2 bg-brand-primary text-brand-bg rounded-lg hover:opacity-90 transition-colors duration-200 text-xs sm:text-sm font-semibold shadow-sm">
                   Get Started
                 </Link>
               </div>
@@ -224,18 +224,18 @@ const Navbar = () => {
 
       {/* Mobile Menu Drawer */}
       {showMobileMenu && (
-        <div className="lg:hidden border-t border-zinc-100 bg-white px-4 py-6 space-y-2 shadow-xl">
+        <div className="lg:hidden border-t border-brand-border bg-brand-nav px-4 py-6 space-y-2 shadow-xl">
           {token ? (
             <>
-              <p className="px-4 py-2 text-[9px] font-black text-zinc-400 uppercase tracking-[0.2em]">Navigation Hub</p>
+              <p className="px-4 py-2 text-[9px] font-black text-brand-muted uppercase tracking-[0.2em] opacity-50">Navigation Hub</p>
               <Link to="/" className={mobileLinkClass('/')}>🏠 Home</Link>
               <Link to="/profile" className={mobileLinkClass('/profile')}>👤 My Posts</Link>
               <Link to="/saved" className={mobileLinkClass('/saved')}>🔖 Saved Library</Link>
               <Link to="/analytics" className={mobileLinkClass('/analytics')}>📊 Analytics</Link>
               <Link to="/metadata" className={mobileLinkClass('/metadata')}>🏷️ Manage Tags</Link>
               <Link to="/create" className={mobileLinkClass('/create')}>✏️ Write a Post</Link>
-              <div className="border-t border-zinc-100 pt-6 mt-4">
-                <p className="px-4 py-2 text-[9px] font-black text-zinc-400 uppercase tracking-[0.2em] mb-2">Account Actions</p>
+              <div className="border-t border-brand-border pt-6 mt-4">
+                <p className="px-4 py-2 text-[9px] font-black text-brand-muted uppercase tracking-[0.2em] mb-2 opacity-50">Account Actions</p>
                 <Link to="/settings" className={mobileLinkClass('/settings')}>⚙️ Edit Profile</Link>
                 <Link to="/change-password" className={mobileLinkClass('/change-password')}>🔒 Change Password</Link>
                 <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-[11px] font-black uppercase tracking-widest text-red-500 hover:bg-red-50 transition-all mt-2">
@@ -257,7 +257,7 @@ const Navbar = () => {
 };
 
 const DropdownLink = ({ to, icon, label, onClick }) => (
-  <Link to={to} onClick={onClick} className="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 transition-colors duration-150">
+  <Link to={to} onClick={onClick} className="flex items-center gap-3 px-4 py-2.5 text-sm text-brand-muted hover:bg-brand-bg hover:text-brand-primary transition-colors duration-150">
     <span className="text-base">{icon}</span>
     <span className="font-medium">{label}</span>
   </Link>
