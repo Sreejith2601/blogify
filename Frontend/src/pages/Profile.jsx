@@ -98,47 +98,47 @@ const Profile = () => {
 
             {/* Avatar */}
             <div className="relative flex-shrink-0">
-              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl bg-zinc-900 flex items-center justify-center">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden border-4 border-brand-primary/10 shadow-2xl bg-brand-surface flex items-center justify-center">
                 {profile.profilePic ? (
                   <img src={resolveMediaUrl(profile.profilePic)} alt={profile.name} className="w-full h-full object-cover" />
                 ) : (
-                  <span className="text-4xl sm:text-5xl font-black text-zinc-700 uppercase">{profile.name?.charAt(0)}</span>
+                  <span className="text-4xl sm:text-5xl font-black text-brand-muted opacity-30 uppercase">{profile.name?.charAt(0)}</span>
                 )}
               </div>
-              <div className="absolute bottom-1 right-1 w-6 h-6 bg-brand-accent rounded-full border-4 border-zinc-900"></div>
+              <div className="absolute bottom-1 right-1 w-6 h-6 bg-brand-accent rounded-full border-4 border-brand-bg"></div>
             </div>
 
             {/* Info */}
             <div className="flex-1 min-w-0">
-              <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tighter mb-2 truncate">{profile.name}</h1>
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-600 mb-4">
+              <h1 className="text-3xl sm:text-5xl font-black text-brand-primary tracking-tighter mb-2 truncate">{profile.name}</h1>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted mb-4 opacity-60">
                 Member since {new Date(profile.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
               </p>
               {profile.bio && (
-                <p className="text-sm sm:text-base text-zinc-400 leading-relaxed max-w-xl mb-6 font-medium">{profile.bio}</p>
+                <p className="text-sm sm:text-base text-brand-muted leading-relaxed max-w-xl mb-6 font-medium">{profile.bio}</p>
               )}
 
               {/* Stats Row */}
               <div className="flex flex-wrap items-center gap-6 sm:gap-12 mb-8">
                 <div className="text-left">
-                  <p className="text-2xl sm:text-3xl font-black text-white">{posts.length}</p>
-                  <p className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest">Stories</p>
+                  <p className="text-2xl sm:text-3xl font-black text-brand-primary">{posts.length}</p>
+                  <p className="text-[9px] text-brand-muted font-bold uppercase tracking-widest opacity-60">Stories</p>
                 </div>
                 <div className="text-left">
-                  <p className="text-2xl sm:text-3xl font-black text-white">{profile.followers?.length || 0}</p>
-                  <p className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest">Readers</p>
+                  <p className="text-2xl sm:text-3xl font-black text-brand-primary">{profile.followers?.length || 0}</p>
+                  <p className="text-[9px] text-brand-muted font-bold uppercase tracking-widest opacity-60">Readers</p>
                 </div>
                 <div className="text-left">
-                  <p className="text-2xl sm:text-3xl font-black text-white">{profile.following?.length || 0}</p>
-                  <p className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest">Following</p>
+                  <p className="text-2xl sm:text-3xl font-black text-brand-primary">{profile.following?.length || 0}</p>
+                  <p className="text-[9px] text-brand-muted font-bold uppercase tracking-widest opacity-60">Following</p>
                 </div>
                 <div className="text-left">
-                  <p className="text-2xl sm:text-3xl font-black text-white">{analytics?.totals?.views || 0}</p>
-                  <p className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest">Impact</p>
+                  <p className="text-2xl sm:text-3xl font-black text-brand-primary">{analytics?.totals?.views || 0}</p>
+                  <p className="text-[9px] text-brand-muted font-bold uppercase tracking-widest opacity-60">Impact</p>
                 </div>
                 <div className="text-left">
                   <p className="text-2xl sm:text-3xl font-black text-brand-accent">{analytics?.totals?.likes || 0}</p>
-                  <p className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest">Tips</p>
+                  <p className="text-[9px] text-brand-muted font-bold uppercase tracking-widest opacity-60">Tips</p>
                 </div>
               </div>
 
@@ -146,19 +146,19 @@ const Profile = () => {
               <div className="flex flex-wrap gap-3">
                 <Link
                   to="/settings"
-                  className="px-6 py-2.5 bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-white/10 transition-all"
+                  className="px-6 py-2.5 bg-white border border-brand-border text-brand-primary text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-brand-surface transition-all shadow-sm"
                 >
                   Settings
                 </Link>
                 <Link
                   to="/metadata"
-                  className="px-6 py-2.5 bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-white/10 transition-all"
+                  className="px-6 py-2.5 bg-white border border-brand-border text-brand-primary text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-brand-surface transition-all shadow-sm"
                 >
                   Tags
                 </Link>
                 <Link
                   to="/create"
-                  className="px-5 py-2 bg-brand-accent text-white text-sm font-semibold rounded-lg hover:bg-brand-accent-hover transition-colors"
+                  className="px-6 py-2.5 bg-brand-accent text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-all shadow-md shadow-brand-accent/20"
                 >
                   + New Post
                 </Link>
@@ -170,17 +170,17 @@ const Profile = () => {
 
       {/* Tabs Section */}
       <main className="px-4 sm:px-6 md:px-10 lg:px-20 py-10 sm:py-14">
-        <div className="flex items-center gap-8 border-b border-white/5 mb-10">
+        <div className="flex items-center gap-8 border-b border-brand-border mb-10">
           <button 
             onClick={() => setActiveTab('posts')}
-            className={`pb-4 text-sm font-black uppercase tracking-widest transition-all relative ${activeTab === 'posts' ? 'text-white' : 'text-zinc-600 hover:text-zinc-400'}`}
+            className={`pb-4 text-sm font-black uppercase tracking-widest transition-all relative ${activeTab === 'posts' ? 'text-brand-primary' : 'text-brand-muted/40 hover:text-brand-primary'}`}
           >
             My Stories
             {activeTab === 'posts' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-brand-accent rounded-full"></div>}
           </button>
           <button 
             onClick={() => setActiveTab('saved')}
-            className={`pb-4 text-sm font-black uppercase tracking-widest transition-all relative ${activeTab === 'saved' ? 'text-white' : 'text-zinc-600 hover:text-zinc-400'}`}
+            className={`pb-4 text-sm font-black uppercase tracking-widest transition-all relative ${activeTab === 'saved' ? 'text-brand-primary' : 'text-brand-muted/40 hover:text-brand-primary'}`}
           >
             Saved
             {activeTab === 'saved' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-brand-accent rounded-full"></div>}
@@ -188,10 +188,10 @@ const Profile = () => {
         </div>
 
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg sm:text-xl font-black text-white">
+          <h2 className="text-lg sm:text-xl font-black text-brand-primary">
             {activeTab === 'posts' ? 'My Contributions' : 'Saved Collection'}
           </h2>
-          <span className="text-sm text-zinc-600">
+          <span className="text-sm text-brand-muted/40">
             {activeTab === 'posts' ? posts.length : savedPosts.length} items
           </span>
         </div>
