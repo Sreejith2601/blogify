@@ -28,7 +28,7 @@ const createPost = async (req, res) => {
 
     // --- Broadcast Notification ---
     if (post.isPublished) {
-      const User = require("../models/user");
+      const User = require("../models/User");
       // Find all followers AND category subscribers
       const recipients = await User.find({
         $or: [
@@ -172,7 +172,7 @@ const updatePost = async (req, res) => {
     // --- Broadcast Notification (if newly published) ---
     // Note: In a production app, we would check if it was previously NOT published
     if (post.isPublished) {
-      const User = require("../models/user");
+      const User = require("../models/User");
       const recipients = await User.find({
         $or: [
           { following: req.user.id },
@@ -503,7 +503,7 @@ const deleteUserTag = async (req, res) => {
 // GET FOLLOWING FEED
 const getFollowingPosts = async (req, res) => {
   try {
-    const User = require("../models/user");
+    const User = require("../models/User");
     const currentUser = await User.findById(req.user.id);
     
     if (!currentUser || !currentUser.following || currentUser.following.length === 0) {
