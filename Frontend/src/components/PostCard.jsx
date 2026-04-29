@@ -108,11 +108,16 @@ const PostCard = ({ post }) => {
     <div className="group flex flex-col h-full bg-brand-surface border border-brand-border rounded-3xl overflow-hidden hover:bg-white hover:border-brand-accent transition-all duration-500 hover:shadow-2xl">
       <div className="p-7 flex-grow flex flex-col">
 
-        {/* Category Pill */}
-        <div className="mb-5">
+        {/* Category Pill & Draft Badge */}
+        <div className="mb-5 flex items-center justify-between">
           <span className="inline-block px-3 py-1 bg-brand-bg rounded-full text-[9px] font-black uppercase tracking-[0.2em] text-brand-muted group-hover:text-brand-accent transition-colors">
             {categories?.[0] || 'Technology'}
           </span>
+          {!post.isPublished && (
+            <span className="px-3 py-1 bg-amber-500/10 text-amber-600 border border-amber-500/20 rounded-full text-[9px] font-black uppercase tracking-widest">
+              Draft
+            </span>
+          )}
         </div>
 
         {/* Title */}

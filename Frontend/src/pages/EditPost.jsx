@@ -174,8 +174,8 @@ const EditPost = () => {
     return (
       <div className="bg-brand-bg min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-8 h-8 border-2 border-zinc-900 border-t-brand-accent rounded-full animate-spin"></div>
-          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-700">Retrieving Signal...</span>
+          <div className="w-8 h-8 border-2 border-brand-border border-t-brand-accent rounded-full animate-spin"></div>
+          <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted">Retrieving Signal...</span>
         </div>
       </div>
     );
@@ -185,13 +185,13 @@ const EditPost = () => {
     <div className="bg-brand-bg min-h-screen py-16 sm:py-24 px-4 sm:px-6 md:px-10">
       <div className="max-w-4xl mx-auto">
         <header className="mb-16">
-          <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tighter mb-3">Refine Story.</h1>
-          <p className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em]">Polishing your ideas for the global network.</p>
+          <h1 className="text-4xl sm:text-6xl font-black text-brand-primary tracking-tighter mb-3">Refine Story.</h1>
+          <p className="text-[10px] font-black text-brand-muted uppercase tracking-[0.2em]">Polishing your ideas for the global network.</p>
         </header>
 
         <form onSubmit={handleSubmit} className="space-y-10">
           <div className="space-y-4">
-            <label htmlFor="title" className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-600">
+            <label htmlFor="title" className="block text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted">
               Signal Title
             </label>
             <input
@@ -201,17 +201,17 @@ const EditPost = () => {
               value={formData.title}
               onChange={handleChange}
               autoComplete="off"
-              className={`w-full bg-transparent border-b ${errors.title ? 'border-red-500 text-red-100 placeholder-red-300' : 'border-white/5 text-white placeholder-zinc-800 focus:border-brand-accent'} pb-4 text-3xl sm:text-5xl font-black outline-none transition-all`}
+              className={`w-full bg-transparent border-b ${errors.title ? 'border-red-500 text-red-900 placeholder-red-300' : 'border-brand-border text-brand-primary placeholder-zinc-300 focus:border-brand-accent'} pb-4 text-3xl sm:text-5xl font-black outline-none transition-all`}
               placeholder="Title of your story..."
             />
             {errors.title && <p className="text-xs text-red-500 font-medium">{errors.title}</p>}
           </div>
 
           <div className="space-y-6">
-            <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-600">
+            <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted">
               Content Stream
             </label>
-            <div className={`quill-obsidian-wrapper bg-white/2 border ${errors.content ? 'border-red-500' : 'border-white/5 focus-within:border-brand-accent/30'} rounded-[2rem] overflow-hidden transition-all shadow-2xl`}>
+            <div className={`quill-obsidian-wrapper bg-brand-surface border ${errors.content ? 'border-red-500' : 'border-brand-border focus-within:border-brand-accent/30'} rounded-[2rem] overflow-hidden transition-all shadow-xl`}>
               <ReactQuill 
                 ref={quillRef}
                 theme="snow"
@@ -226,7 +226,7 @@ const EditPost = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="space-y-4">
-              <label htmlFor="category" className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-600">
+              <label htmlFor="category" className="block text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted">
                 Classification (comma list)
               </label>
               <input
@@ -235,12 +235,11 @@ const EditPost = () => {
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="w-full bg-white/2 border border-white/5 rounded-2xl px-6 py-4 text-white placeholder-zinc-800 focus:border-brand-accent outline-none transition-all text-sm shadow-xl"
+                className="w-full bg-brand-surface border border-brand-border rounded-2xl px-6 py-4 text-brand-primary placeholder-zinc-300 focus:border-brand-accent outline-none transition-all text-sm shadow-md"
               />
             </div>
-
             <div className="space-y-4">
-              <label htmlFor="tags" className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-600">
+              <label htmlFor="tags" className="block text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted">
                 Metadata Tags (comma list)
               </label>
               <input
@@ -249,30 +248,29 @@ const EditPost = () => {
                 name="tags"
                 value={formData.tags}
                 onChange={handleChange}
-                className="w-full bg-white/2 border border-white/5 rounded-2xl px-6 py-4 text-white placeholder-zinc-800 focus:border-brand-accent outline-none transition-all text-sm shadow-xl"
+                className="w-full bg-brand-surface border border-brand-border rounded-2xl px-6 py-4 text-brand-primary placeholder-zinc-300 focus:border-brand-accent outline-none transition-all text-sm shadow-md"
               />
             </div>
           </div>
 
-          <div className="flex items-center justify-between py-12 border-y border-white/5">
+          <div className="flex items-center justify-between py-12 border-y border-brand-border">
             <div className="flex items-center gap-4">
               <button
                 type="button"
                 onClick={() => setFormData(prev => ({ ...prev, isPublished: !prev.isPublished }))}
-                className={`w-14 h-7 rounded-full transition-all relative ${formData.isPublished ? 'bg-brand-accent' : 'bg-white/5'}`}
+                className={`w-14 h-7 rounded-full transition-all relative ${formData.isPublished ? 'bg-brand-accent' : 'bg-brand-border'}`}
               >
                 <div className={`absolute top-1.5 left-1.5 w-4 h-4 rounded-full transition-transform duration-300 ${formData.isPublished ? 'translate-x-7 bg-zinc-950' : 'bg-zinc-600'}`} />
               </button>
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted">
                 {formData.isPublished ? 'Live Signal' : 'Private Draft'}
               </span>
             </div>
-
             <div className="flex items-center gap-8">
               <button
                 type="button"
                 onClick={() => navigate(`/post/${id}`)}
-                className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-600 hover:text-white transition-all underline underline-offset-8"
+                className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted hover:text-brand-primary transition-all underline underline-offset-8"
                 disabled={saving}
               >
                 Abort
@@ -280,7 +278,7 @@ const EditPost = () => {
               <button
                 type="submit"
                 disabled={saving}
-                className="px-12 py-4 bg-white text-zinc-950 text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-zinc-200 transition-all shadow-2xl shadow-white/5 disabled:opacity-50"
+                className="px-12 py-4 bg-brand-primary text-brand-bg text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl hover:opacity-90 transition-all shadow-xl disabled:opacity-50"
               >
                 {saving ? 'Transmitting...' : 'Update Story'}
               </button>
